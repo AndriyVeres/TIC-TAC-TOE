@@ -1,0 +1,9 @@
+main:main.o ./with_arrows/readkey.o
+	g++ main.o -lncurses -o main
+	./main
+main.o:main.cpp
+	g++ -c main.cpp
+./with_arrows/readkey.o:./with_arrows/readkey.cpp
+	g++ -c ./with_arrows/readkey.cpp
+clean:
+	rm -rf *.o main

@@ -1,0 +1,74 @@
+## INITIALIZE SCREEN
+
+    initscr();             //initialize screen
+		
+    printw("Hello World"); //print string
+    refresh();             //refresh and flush
+		
+    endwin();              //end window
+
+## CURSOR FUNCTIONS
+
+    move(unsigned int iRows,unsigned int iSymbols);
+>*move carriage*
+
+    mvprintw(unsigned int iRows,unsigned int iSymbols,"text");
+>*move()+printw()*
+
+    curs_set(0);
+>*invisible cursor*
+
+    curs_set(1);
+>*normal visibility terminal-based settings cursor*
+
+    curs_set(2);
+>*high visibility terminal-based settings cursor*
+
+### INTERACTION WITH USER
+    echo();
+>*enable to show user entered symbols*
+
+    noecho();
+>*disable to show user entered symbol*
+
+	raw();
+>*enable terminal raw mode*
+
+	noraw();
+>*disable terminal raw mode*
+
+	getmaxyx(stdscr,int y,int x);
+>*get screen resolution in symbols stdscr - standart (current) screen, if we work on one screenorg*
+
+### ATTRIBUTES
+
+	attron(int attrs);
+>*set ON attribute*
+
+	attroff(int attrs);
+>*set OFF attribute*
+	
+### TEXT COLORING
+
+	int start_color();
+>*initialize coloring*
+
+	int init_pair(short ColorPairName, short foreground, short background);
+
+*  foreground - characters, 
+*   background - wall, 
+*   ColorPairName - name for using color pair by attron/attroff*
+
+	attron(COLOR_PAIR(ColorPairName));
+>*set up color scheme
+
+	attroff(COLOR_PAIR(color_pair_name));
+>*set down color scheme*
+
+### WINODOWS
+
+	WINDOW* win = newwin(unsigned int iHeight, unsigned int iWidth, unsigned int y, unsigned int x); //WINDOW type size - 100 bytes
+		
+	wrefresh(win); //refresh window
+		
+	delwin(win);   //delete window

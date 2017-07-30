@@ -1,0 +1,7 @@
+1) Unpack archive
+2) go to curses directory
+3) sudo export CPPFLAGS="-P"
+4) sudo make
+5) sudo make install
+
+# 3) sudo export CPPFLAGS="-P" -  solution that was found according to https://trac.sagemath.org/ticket/19762/
