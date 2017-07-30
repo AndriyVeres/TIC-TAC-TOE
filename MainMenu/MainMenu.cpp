@@ -1,0 +1,139 @@
+#include "MainMenu.h"
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include "readKey.h" //use for reading arrow keys
+#include <ncurses.h> //use for getting console dimensions
+
+namespace MainMenu
+{
+
+  //iChoise = 1 //single game
+  //iChoise = 2 //multiple game
+  //iChoise = 3 //quit
+  
+   unsigned int mainMenuChoise()
+   {
+     //clearing memory for preventing closed loop while (keyArr[0] != 10)
+     char keyArr[3]={'\0','\0','\0'};
+     unsigned int iChoise(1);
+
+
+     //first call time main menu choise
+     printMainMenu(iChoise);
+     
+     //reading key
+     readKey::initReadKey();//initial settigs for readKey()
+     
+     while(keyArr[0] != 10) //ENTER key code
+       {
+	 readKey::readKey(keyArr,3);
+	 
+	 //up menu moving
+	 if(keyArr[1] == '[' && keyArr[2] == 'A' && iChoise > 1)
+	   {
+	     iChoise--;
+	   }
+
+	 //down menu moving
+	 if(keyArr[1] == '[' && keyArr[2] == 'B' && iChoise < 3)
+	   {
+	     iChoise++;
+	   }
+	 
+	 printMainMenu(iChoise);
+	 
+       }
+     
+     return iChoise;
+   }
+
+
+
+
+  
+  void printMainMenu(const int iChoise)
+  {
+    int yRows,xColumns; //console dimensions
+    int yVerticalSize = 22; //vertical menu size
+    int xHorizontalSize = 19;
+    int yLogoVerticalSize = 8;
+    
+    //getting console dimensions
+    initscr();
+    getmaxyx(stdscr,yRows,xColumns);
+    endwin();
+    /////////////////////////////
+
+    //clear screen
+    system("clear");
+    
+    //print logo
+    for(int i=0;i<(yRows-yVerticalSize)/2;++i)
+      std::cout<<std::endl;
+    
+
+	//logo print 	
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"x      x     0000 "<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<" x    x     0    0"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"  x  x     0      0"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"   xx      0      0"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"  x  x     0      0"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<" x    x     0    0"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"x      x     0000 "<<std::endl;
+
+	std::cout<<std::endl;
+
+
+     //print header of main menu
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*******************"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*                 *"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*   TIC-TAC-TOE   *"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*                 *"<<std::endl;
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*******************"<<std::endl;
+
+	//print main menu list
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*                 *"<<std::endl;
+
+	//print SINGLE GAME
+        for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	
+	if(iChoise == 1)
+	  std::cout<<"* > SINGLE GAME < *"<<std::endl;
+	else
+	  std::cout<<"*   SINGLE GAME   *"<<std::endl;
+
+	// print MULTIPLE GAME
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	
+	if(iChoise == 2)
+	  std::cout<<"* >MULTIPLE GAME< *"<<std::endl;
+	else
+	  std::cout<<"*  MULTIPLE GAME  *"<<std::endl;
+
+	// print QUIT
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	
+	if(iChoise == 3)
+	  std::cout<<"* >    QUIT     < *"<<std::endl;
+	else
+	  std::cout<<"*      QUIT       *"<<std::endl;
+
+	//end of menu
+	for(int j=0;j < (xColumns-xHorizontalSize)/2;++j) std::cout<<" ";
+	std::cout<<"*******************"<<std::endl;
+  }
+}

@@ -1,0 +1,9 @@
+main: main.o MainMenu.o readKey.o
+	g++ main.o MainMenu.o readKey.o -lncurses -o main
+	./main
+main.o: main.cpp
+	g++ -c main.cpp
+MainMenu.o: MainMenu.cpp
+	g++ -c MainMenu.cpp
+readKey.o: readKey.c
+	g++ -c readKey.c

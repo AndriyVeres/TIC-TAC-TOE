@@ -1,0 +1,23 @@
+#include "./MainMenu/MainMenu.h"
+#include "./readKey/readKey.h"
+#include <stdlib.h>
+#include <iostream>
+#include <unistd.h>
+
+
+enum MAIN_MENU {SINGLE_GAME=1,MULTIPLE_GAME,QUIT};
+
+using namespace std;
+
+int main()
+{
+  int iChoise = 1;
+  
+  while(iChoise != QUIT)
+    {  
+      iChoise = MainMenu::mainMenuChoise(); //closed loop, when iChoise != 3
+    }
+
+  system("clear");
+  return 0;
+}
